@@ -66,7 +66,12 @@ void dealloc(Node* head)
 //   Add any helper functions or
 //   function object struct declarations
 // -----------------------------------------------
-
+struct odd {
+  bool operator()(int val) {
+    int result = val % 2;
+    return (result > 0);
+  }
+};
 
 
 
@@ -85,11 +90,21 @@ int main(int argc, char* argv[])
     cout << "Original list: ";
     print(head);
 
-    // Test out your linked list code
+    Node *smaller = nullptr, *larger = nullptr;
+    int pivot = 10; 
+    llpivot(head, smaller, larger, pivot);
+    cout << "Smaller: ";
+    print(smaller);
+    cout << "Larger: ";
+    print(larger);
 
+    dealloc(smaller);
+    dealloc(larger);
+    head = readList(argv[1]); 
 
+    head = llfilter(head, odd());
+    cout << "After filtering the odd: ";
+    print(head);
 
-    
     return 0;
-
 }
